@@ -27,7 +27,7 @@ En el archivo Makefile se configura la placa a utilizar y el programa a compilar
 - PROGRAM_PATH = \<Direccion del ejemplo a compilar>
 - PROGRAM_NAME = \<Nombre del ejemplo a compilar>
 
-![Makefile](https://github.com/juanmaher/TPs_Embebidos_FIUBA/TP_1/Imagenes_TP_1/Makefile.png)
+![Makefile](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Makefile.png)
 
 #### 1.2 Generación de codigo Yakindu
 
