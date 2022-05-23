@@ -58,17 +58,29 @@ Al abrirse la nueva pestaña, se debe asegurar que esten configuradas las siguie
 En caso de querer modificar el proyecto se debe hacer clic en Search Project y seleccionar el indicado.
 
 ![Debug_3](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Debug_process_3.png)
+
 #### 2.1 Explicación de los ejemplos de statechart de la sapi
 
-A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca Sapi. En todos los ejemplos se ha simulado su comportamiento mediante los sieguentes pasos
-- 
-Como se muestra en la siguiente figura  en los dos primeros ejemplos *toggle.sct* y blink.sct se ha creado diagrama de estados con estados simple, donde se ha tratado, en el primero la creacion de una maquina de estado simple con una solo evento que enciende y apaga un Led en un tiempo determinado por un delay que controla todo el ciclo de scan de programa, en el segundo ejemplo se relacionan dos estados y nuevas constantes que permiten apagar y encender el LED, pero lo mas importante es que se implementa la utilizacion de timers e interrupciones por medio de funciones implementadas en la sapo.h.
+A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca *sapi*. En todos los ejemplos se ha simulado su comportamiento como lo indica la siguiente figura
 
-Como se muestra en la siguiente figura  el primer ejemplo toggle.sct es un diagrama de estado implementado con yakindu, en este ejemplo primer
+![simulationStateChart](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/simulationStateChart.png)
+
+
+El primer ejemplo *toggle.sct* es un diagrama de estado implementado con yakindu, en este ejemplo se ha definido un solo evento que enciende y apaga el LED con un tiempo determinado por un delay. En particular este tiempo controla todo el ciclo del programa *main.c*. Desde el lado del desarrollador yakindu solicita que en el archivo *ToggleRequired.h*, que se implementan determinadas funciones que trabajan como la interfaz entre nuestro diagrama de estados y la placa electrónica de desarrollo. Por otro lado, esta función definida en nuestro *main.c*, será utilizada por yakindu para implementar las acciones necesarias en base a los eventos. Para este caso se ha implementado la función *extern void toggleIface_opLED(const Toggle* handle, const sc_integer LEDNumber);* , que enciende y apaga el LED.
+
 ![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/toggle.PNG)
 
-En el tercer ejemplo se muestra la implementacion de estados compuestos. Finalmente en el tercer ejemplo se agrega la composicion de estados por jeraquia. Como se ve en la siguente imagen el estado
+El segundo ejemplo blink.sct también es un diagrama de estado simple, que implementa sus eventos como timers para encender y apagar el LED 3. Se modificó la función *opLED*  de forma tal que reciba una constante boolena de estado ON, OFF. Para el manejo de los timer se utilizó los archivos *TimerTicks.h* y *TimerTicks.c* de la biblioteca sapi para implementar las siguientes funciones que responden a los eventos *after x ms*. 
 
+- *extern void blink_setTimer(Blink* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);*
+- *extern void blink_unsetTimer(Blink* handle, const sc_eventid evid);*
+- 
+Estas funciones trabajan con interrupciones y son utilizadas por las acciones definidas en el código generado por yakindu.
+
+![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/blink.PNG)
+
+
+En el tercer ejemplo se muestra la implementacion de estados compuestos.Completo mañana, me voy a cursar :)
 
 
 
