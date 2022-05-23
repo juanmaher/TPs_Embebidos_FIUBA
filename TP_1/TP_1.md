@@ -58,3 +58,18 @@ Al abrirse la nueva pestaña, se debe asegurar que esten configuradas las siguie
 En caso de querer modificar el proyecto se debe hacer clic en Search Project y seleccionar el indicado.
 
 ![Debug_3](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Debug_process_3.png)
+#### 2.1 Explicación de los ejemplos de statechart de la sapi
+
+A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca Sapi. En todos los ejemplos se ha simulado su comportamiento mediante los sieguentes pasos
+- 
+Como se muestra en la siguiente figura  en los dos primeros ejemplos *toggle.sct* y blink.sct se ha creado diagrama de estados con estados simple, donde se ha tratado, en el primero la creacion de una maquina de estado simple con una solo evento que enciende y apaga un Led en un tiempo determinado por un delay que controla todo el ciclo de scan de programa, en el segundo ejemplo se relacionan dos estados y nuevas constantes que permiten apagar y encender el LED, pero lo mas importante es que se implementa la utilizacion de timers e interrupciones por medio de funciones implementadas en la sapo.h.
+
+Como se muestra en la siguiente figura  el primer ejemplo toggle.sct es un diagrama de estado implementado con yakindu, en este ejemplo primer
+![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/toggle.PNG)
+
+En el tercer ejemplo se muestra la implementacion de estados compuestos. Finalmente en el tercer ejemplo se agrega la composicion de estados por jeraquia. Como se ve en la siguente imagen el estado
+
+
+
+
+
