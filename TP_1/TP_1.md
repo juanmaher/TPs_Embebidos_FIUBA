@@ -74,7 +74,7 @@ El segundo ejemplo blink.sct también es un diagrama de estado simple, que imple
 
 - *extern void blink_setTimer(Blink* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);*
 - *extern void blink_unsetTimer(Blink* handle, const sc_eventid evid);*
-- 
+
 Estas funciones trabajan con interrupciones y son utilizadas por las acciones definidas en el código generado por yakindu.
 
 ![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/blink.PNG)
