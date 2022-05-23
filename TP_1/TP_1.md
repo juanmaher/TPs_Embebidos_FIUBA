@@ -9,7 +9,7 @@
 
   *Meoli Lucas - 102190 - lmeoli@fi.uba.ar*
   
-## 1) Guía para compilar y debuguear 
+## 1) Guía para compilar y debuggear 
 
 En primer lugar, se debe proceder a instalar el CIAA Launcher, cargar el proyecto firmware_v3 e instalar el plug in de Yakindu como se indica los siguientes links:
 
@@ -29,8 +29,32 @@ En el archivo Makefile se configura la placa a utilizar y el programa a compilar
 
 ![Makefile](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Makefile.png)
 
-#### 1.2 Generación de codigo Yakindu
+#### 1.2 Generación de código Yakindu
 
-Dentro de la carpeta del ejemplo a compilar, deben existir 2 archivos, un .sct y un .sgen. El archivo con extensión .sct es el que contiene la maquina de estado del ejemplo.
-El archivo .sgen es el encargado de generar los archivos correspondientes a la maquina de estados. Genera 3 tipos de archivos: un nombre.c, un nombre.h y un nombre_requiered.c.
-Los dos primeros archivos, corresponde al código generado por yakindu, y el último archivo indica cuales son las funciones que debemos generar nosotros.
+Dentro de la carpeta del ejemplo a compilar, deben existir 2 archivos, un .sct y un .sgen. El archivo con extensión .sct es el que contiene la máquina de estado del ejemplo.
+El archivo .sgen es el encargado de generar los archivos correspondientes a la máquina de estados. Genera 3 tipos de archivos: un \<nombre>.c, un \<nombre>.h y un \<nombre_requiered>.c.
+Los dos primeros archivos, corresponde al código generado por Yakindu, y el último archivo indica cuales son las funciones que debemos generar nosotros. 
+
+Para Generar el código se debe hacer clic derecho sobre \<nombre>.sgen => Generate Code Artifacts.
+
+![Generate code artifacts](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Generate_code_artifacts.png)
+
+#### 1.3 Compilación y debug
+
+Una vez generado el codigo, se debe compilar haciendo clic en el martillo de arriba a la izquierda o haciendo clic derecho sobre el proyecto => Build Project.
+
+Luego, para debagguear se debe hacer clic en la flecha que se encuentra al costado del botón de debug y seleccionar Debug Configurations.
+
+![Debug_1](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Debug_process_1.png)
+
+Al abrirse la nueva pestaña, se debe asegurar que esten configuradas las siguientes opciones:
+
+- Se encuentre seleccionado GDB OpenOCD Debbugging.
+- El proyecto sea firmware_v3
+- C/C++ Application sea el ejemplo que se desea debaggear.
+
+![Debug_2](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Debug_process_2.png)
+
+En caso de querer modificar el proyecto se debe hacer clic en Search Project y seleccionar el indicado.
+
+![Debug_3](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Debug_process_3.png)
