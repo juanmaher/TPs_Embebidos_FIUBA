@@ -24,5 +24,13 @@ Una vez realizados las indicaciones anteriores, se debe conectar la placa EDU-CI
 En el archivo Makefile se configura la placa a utilizar y el programa a compilar: 
 
 - BOARD = edu_ciaa_nxp
-- PROGRAM_PATH = <Direccion del ejemplo a compilar>
-- PROGRAM_NAME = <Nombre del ejemplo a compilar>
+- PROGRAM_PATH = \<Direccion del ejemplo a compilar>
+- PROGRAM_NAME = \<Nombre del ejemplo a compilar>
+
+![Makefile](https://github.com/juanmaher/TPs_Embebidos_FIUBA/TP_1/Imagenes_TP_1/Makefile.png)
+
+#### 1.2 Generación de codigo Yakindu
+
+Dentro de la carpeta del ejemplo a compilar, deben existir 2 archivos, un .sct y un .sgen. El archivo con extensión .sct es el que contiene la maquina de estado del ejemplo.
+El archivo .sgen es el encargado de generar los archivos correspondientes a la maquina de estados. Genera 3 tipos de archivos: un nombre.c, un nombre.h y un nombre_requiered.c.
+Los dos primeros archivos, corresponde al código generado por yakindu, y el último archivo indica cuales son las funciones que debemos generar nosotros.
