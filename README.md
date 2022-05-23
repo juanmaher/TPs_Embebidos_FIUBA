@@ -5,8 +5,6 @@ Este repositorio contiene los trabajos prácticos desarrollados durante la cursa
 
 ### *Integrantes:*
 
-  Hernández Juan Manuel - 102196 - jmhernandez@fi.uba.ar
-
-  Meoli Lucas - 102190 - lmeoli@fi.uba.ar
-  
-  Aranda Cristian - 93631 - carandac@fi.uba.ar
+* Aranda Cristian - 93631 - carandac@fi.uba.ar
+* Hernández Juan Manuel - 102196 - jmhernandez@fi.uba.ar
+* Meoli Lucas - 102190 - lmeoli@fi.uba.ar
