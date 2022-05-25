@@ -125,6 +125,8 @@ en que estado se encuentre.
 
     - El uC vuelve a dormirse.
 
+
+
 ### 2.2) Ejemplo 2 - Blink
 
 El segundo ejemplo, *blink.sct*, es un diagrama de estados simple que invierte el estado de un LED 3 luego de un periodo 
@@ -162,6 +164,8 @@ A las funciones implementadas y utilizadas del ejemplo 1, se les agregan las sig
 
     - El uC vuelve a dormirse.
 
+
+
 #### 2.3) Ejemplo 3 - IdleBlink
 
 El diagrama de estados de este ejemplo representa un programa que se encarga de invertir el estado de un LED luego de un
@@ -176,14 +180,100 @@ Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que 
 
 #### Funciones de inicialización
 
+Las funciones que se llaman al iniciar el programa son las mismas que en los ejemplos anteriores.
+
 #### Funciones externas
+
+Los funciones que se desarrollaron para este ejemplo son iguales o equivalentes a las utilizadas en los ejemplos anteriores.
 
 #### Ciclo while
 
-#### 2.4 - Ejemplo 4, Buttons
+El ciclo while de este ejemplo es equivalente al del ejemplo 2.
 
 
-#### 2.5 - Ejemplo 5, Application
+
+#### 2.4) Ejemplo 4 - Buttons
+
+El diagrama de estados de este ejemplo representa el funcionamiento de un programa que permite encender o apagar un LED
+con un pulsador. Cuando se aprieta se dispara un evento evTECXOprimido y se pasa del estado NO_OPRIMIDO al estado
+DEBOUNCE. Este evento se dispara apretando cualquiera de los 4 botenes. Luego, se inicia un timer que pasados 100 ms se 
+dispara un evento que hace que se avance al evento VALIDACION. Esto se implementa para evitar el rebote del pulsador, ya
+que si en este estado el pulsador no sigue apretado, se disparará el evento evTECXNoOprimido y se volverá al estado 
+NO_OPRIMIDO. En caso contrario, se disapara el evento evTECXOprimido nuevamente y se pasará al estado OPRIMIDO. Una vez
+en este estado se ejecutará la acción entry y se ejecutará la función opLED() que invertirá el estado del LED 3. Además,
+se inicializará la variable entera viTecla con el número de botón que se ha pulsado. Esta información se extrae del evento
+evTECXOprimido. Cuando se suelte el botón, se pasa al estado NO_OPRIMIDO. 
+
+![Buttons](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/Buttons.PNG)
+
+Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que se encuentra en la biblioteca sapi.
+
+#### Funciones de inicialización
+
+Las funciones que se llaman al iniciar el programa son las mismas que en los ejemplos anteriores.
+
+#### Funciones externas
+- _**buttonsIface_opLED()**_: Invierte el estado de una salida conectada a un LED.
+- _**Buttons_GetStatus\_()**_: Devuelve un entero que representa en que estado se encuentran los 4 pulsadores a partir 
+  de la lectura de cada GPIO.
+
+#### Ciclo while
+- El estado del LED es invertido en el programa principal.
+    - _**__WFI()**_: El microcontrolador espera una interrupción que lo despierte.
+
+    - Cuando el uC se despierta, el programa verifica el valor de SysTick_Time_Flag y en función de eso continua o no.
+        - Resetea el valor de SysTick_Time_Flag.
+        - Actualiza todos los Timer Ticks.
+        - Recorre todos los Timer Ticks y si hay algún evento pendiente:
+            - Se produce el evento.
+            - Se marca como ejecutado.
+        - Se obtiene el estado de los pulsadores.
+          - Si algún o algunos pulsadores están apretados, se ejecuta el evento evTECXOprimodo.
+          - En caso contrario, se ejecuta el evento evTECXNoOprimodo.
+        - Se ejecuta un ciclo del diagrama de estados.
+
+    - El uC vuelve a dormirse.
+    
+
+
+#### 2.5) Ejemplo 5 - Application
+
+El diagrama de estados implementado para este ejemplo representa un programa que se encarga de encender, apagar y hacer
+parpadear LEDs según los botones que se pulsen. Para esto se utilizan timers y los eventos temporales de Yakindu. Además,
+se agrega un antirrebote para que haya una correcta interpretación de los estados de los botones.
+
+El Statechart de este ejemplo incorpora cosas de los ejemplos anteriores. Para la interpretación de los botones utiliza
+los mismos estados y eventos del ejemplo 4. A diferencia del ejemplo anterior, se le da importancia a que botón fue pulsado, ya que
+dependiendo de esto se valida con el evento interno, siTECXOK, el valor de viTecla y se ejecutan distintas funciones:
+
+- Con la tecla 1 se apagan todos los LEDs y se setea el evento interno siNoTitilarLED. 
+- Con la tecla 2 se enciende el LED 1.
+- Con la tecla 3 se enciende el LED 2.
+- Con la tecla 4 se setea el evento interno siTitilarLED.
+
+Este diagrama incorpora del ejemplo 3 sus estados para hacer parpadear el LED 3 con la diferencia de que ahora se pasa
+al estado compuesto, TITILAR, cuando se dispara el evento siTitilarLED y no luego de un tiempo establecido. Dentro de
+este estado compuesto se pasa del estado APAGADO al ENCENDIDO y viceversa cada cierto tiempo establecido. Para esto se
+utiliza el TimerTicks de la biblioteca sapi. En el estado APAGADO se ejecuta la función opLED() que apagado el LED 3 y 
+analogamente en el estado ENCENDIDO se ejecuta la misma función que lo enciende. Cuando se ejecute el evento siNoTitilarLED 
+se sale del estado TITILAR y se vuelve al estado REPOSO. 
+
+![Application](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/Application.PNG)
+
+Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que se encuentra en la biblioteca sapi.
+
+#### Funciones de inicialización
+
+Las funciones que se llaman al iniciar el programa son las mismas que en los ejemplos anteriores.
+
+#### Funciones externas
+- _**applicationIface_opLED()**_: Setea el estado de un LED dado a partir de un valor boolean.
+
+#### Ciclo while
+
+El ciclo while de este ejemplo es equivalente al del ejemplo 4.
+
+
 
 ## 3) Ejemplos de Trabajo Práctico Final 
 
