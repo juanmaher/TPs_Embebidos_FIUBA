@@ -59,6 +59,23 @@ En caso de querer modificar el proyecto se debe hacer clic en Search Project y s
 
 ![Debug_3](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Debug_process_3.png)
 
+#### 1.4 Problemas
+
+El principal problema a la hora de instalar las herramientas necesarias para la utilización de la placa EDU-CIAA fue lograr el correcto funcionamiento de Yakindu.
+En primer lugar, se instalo la última versión disponible (4.0.5) desde el Marketplace, la cual terminó no siendo compatible con la versión de eclipse utilizada. 
+Para solucionarlo, se recurrió a instalar la versión 3.4.1 realizando los siguientes pasos.
+
+- Clic en Help -> Install New Software.
+- Desmarcar la opcion "Show only the latest versions of available software".
+- Ingresar en "Work with" el siguiente link: http://updates.yakindu.com/statecharts/releases/.
+- Esperar que termine la búsqueda.
+- Buscar la versin 3.4.1.
+- Seleccionar todo las opciones e instalarlo.
+
+![Version_Yakindu](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Version_Yakindu.png)
+
+
+
 #### 2.1 Explicación de los ejemplos de statechart de la sapi
 
 A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca *sapi*. En todos los ejemplos se ha simulado su comportamiento como lo indica la siguiente figura
