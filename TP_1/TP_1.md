@@ -91,7 +91,7 @@ todos los ejemplos se ha simulado su comportamiento como lo indica la siguiente 
 
 ![simulationStateChart](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/simulationStateChart.png)
 
-### 2.1) Ejemplo 1 - Toggle
+### 2.1 Ejemplo 1 - Toggle
 
 El primer ejemplo *toggle.sct* es un diagrama de estados implementado con Yakindu, en este ejemplo se ha definido un solo 
 evento que enciende y apaga el LED con un tiempo determinado por un delay. En particular este tiempo controla todo el ciclo 
@@ -102,7 +102,7 @@ del programa *main.c*.
 A partir del evento evTick que ocurre cada TICKRATE_MS se ejecuta la función opLED que apaga o enciende el LED3 dependiendo 
 en que estado se encuentre.
 
-#### Funciones de inicialización
+#### 2.1.1 Funciones de inicialización
 
 - _**boardConfig()**_: Según la placa seleccionada se configuran e inicializan los GPIO.
 - _**tickConfig()**_: Se inicializa el Ticks counter según TICKRATE_MS. Se establece el tiempo que tarda en producirse 
@@ -110,11 +110,11 @@ en que estado se encuentre.
 - _**tickCallbackSet()**_: Se setea que función se llamará cuando se produzca la interrupción.
 - _**toggle_init(), toggle_enter()**_: Se inicializa el Statechart.
 
-#### Funciones externas
+#### 2.1.2 Funciones externas
 - _**myTickHook()**_: Cuando se dispara la interrupción de sysTick se setea un Flag: SysTick_Time_Flag.
 - _**toggleIface_opLED()**_: Invierte el estado de una salida conectada a un LED.
 
-#### Ciclo while
+#### 2.1.3 Ciclo while
 - El estado del LED es invertido en el programa principal.
     - _**__WFI()**_: El microcontrolador espera una interrupción que lo despierte.
 
@@ -127,7 +127,7 @@ en que estado se encuentre.
 
 
 
-### 2.2) Ejemplo 2 - Blink
+### 2.2 Ejemplo 2 - Blink
 
 El segundo ejemplo, *blink.sct*, es un diagrama de estados simple que invierte el estado de un LED 3 luego de un periodo 
 de tiempo usando timers.
@@ -137,19 +137,19 @@ de tiempo usando timers.
 Para el manejo de los timers se utilizaron los archivos *TimerTicks.h* y *TimerTicks.c* de la biblioteca sapi. Las funciones
 definidas estos archivos son utilizadas por las acciones definidas en el código generado por Yakindu.
 
-#### Funciones de inicialización
+#### 2.2.1 Funciones de inicialización
 
 A las funciones implementadas y utilizadas del ejemplo 1, se les agregan las siguientes:
 
 - _**InitTimerTicks()**_: Inicializa el timer.
 - _**blink_init(), blink_enter()**_: Inicializa el Statechart.
 
-#### Funciones externas
+#### 2.2.2 Funciones externas
 - _**blinkIface_opLED()**_: Setea el estado de un LED dado a partir de un valor boolean.
 - _**blink_setTimer()**_: Setea el timer a partir de los eventos temporales de la máquina de estados.
 - _**blink_unsetTimer()**_: Resetea el timer.
 
-#### Ciclo while
+#### 2.2.3 Ciclo while
 - El estado del LED es invertido en el programa principal.
     - _**__WFI()**_: El microcontrolador espera una interrupción que lo despierte.
 
@@ -166,7 +166,7 @@ A las funciones implementadas y utilizadas del ejemplo 1, se les agregan las sig
 
 
 
-#### 2.3) Ejemplo 3 - IdleBlink
+#### 2.3 Ejemplo 3 - IdleBlink
 
 El diagrama de estados de este ejemplo representa un programa que se encarga de invertir el estado de un LED luego de un
 cierto periodo de tiempo. Para esto, se utilizan los eventos temporales de Yakindu y un timer implementado con TimerTicks. 
@@ -178,21 +178,21 @@ estado compuesto, "titila", en el cual se desarrolla una secuencia en la que el 
 
 Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que se encuentra en la biblioteca sapi.
 
-#### Funciones de inicialización
+#### 2.3.1 Funciones de inicialización
 
 Las funciones que se llaman al iniciar el programa son las mismas que en los ejemplos anteriores.
 
-#### Funciones externas
+#### 2.3.2 Funciones externas
 
 Los funciones que se desarrollaron para este ejemplo son iguales o equivalentes a las utilizadas en los ejemplos anteriores.
 
-#### Ciclo while
+#### 2.3.3 Ciclo while
 
 El ciclo while de este ejemplo es equivalente al del ejemplo 2.
 
 
 
-#### 2.4) Ejemplo 4 - Buttons
+#### 2.4 Ejemplo 4 - Buttons
 
 El diagrama de estados de este ejemplo representa el funcionamiento de un programa que permite encender o apagar un LED
 con un pulsador. Cuando se aprieta se dispara un evento evTECXOprimido y se pasa del estado NO_OPRIMIDO al estado
@@ -208,16 +208,16 @@ evTECXOprimido. Cuando se suelte el botón, se pasa al estado NO_OPRIMIDO.
 
 Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que se encuentra en la biblioteca sapi.
 
-#### Funciones de inicialización
+#### 2.4.1 Funciones de inicialización
 
 Las funciones que se llaman al iniciar el programa son las mismas que en los ejemplos anteriores.
 
-#### Funciones externas
+#### 2.4.2 Funciones externas
 - _**buttonsIface_opLED()**_: Invierte el estado de una salida conectada a un LED.
 - _**Buttons_GetStatus\_()**_: Devuelve un entero que representa en que estado se encuentran los 4 pulsadores a partir 
   de la lectura de cada GPIO.
 
-#### Ciclo while
+#### 2.4.3 Ciclo while
 - El estado del LED es invertido en el programa principal.
     - _**__WFI()**_: El microcontrolador espera una interrupción que lo despierte.
 
@@ -236,7 +236,7 @@ Las funciones que se llaman al iniciar el programa son las mismas que en los eje
     
 
 
-#### 2.5) Ejemplo 5 - Application
+#### 2.5 Ejemplo 5 - Application
 
 El diagrama de estados implementado para este ejemplo representa un programa que se encarga de encender, apagar y hacer
 parpadear LEDs según los botones que se pulsen. Para esto se utilizan timers y los eventos temporales de Yakindu. Además,
@@ -262,14 +262,14 @@ se sale del estado TITILAR y se vuelve al estado REPOSO.
 
 Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que se encuentra en la biblioteca sapi.
 
-#### Funciones de inicialización
+#### 2.5.1 Funciones de inicialización
 
 Las funciones que se llaman al iniciar el programa son las mismas que en los ejemplos anteriores.
 
-#### Funciones externas
+#### 2.5.2 Funciones externas
 - _**applicationIface_opLED()**_: Setea el estado de un LED dado a partir de un valor boolean.
 
-#### Ciclo while
+#### 2.5.3 Ciclo while
 
 El ciclo while de este ejemplo es equivalente al del ejemplo 4.
 
