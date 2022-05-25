@@ -76,16 +76,19 @@ Para solucionarlo, se recurrió a instalar la versión 3.4.1 realizando los sigu
 
 
 
-#### 2.1 Explicación de los ejemplos de statechart de la sapi
+## 2) Explicación de los ejemplos de statechart de la sapi
 
 A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca *sapi*. En todos los ejemplos se ha simulado su comportamiento como lo indica la siguiente figura
 
 ![simulationStateChart](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/simulationStateChart.png)
 
+#### 2.1 - Ejemplo 1, Toggle
 
 El primer ejemplo *toggle.sct* es un diagrama de estado implementado con yakindu, en este ejemplo se ha definido un solo evento que enciende y apaga el LED con un tiempo determinado por un delay. En particular este tiempo controla todo el ciclo del programa *main.c*. Desde el lado del desarrollador yakindu solicita que en el archivo *ToggleRequired.h*, que se implementan determinadas funciones que trabajan como la interfaz entre nuestro diagrama de estados y la placa electrónica de desarrollo. Por otro lado, esta función definida en nuestro *main.c*, será utilizada por yakindu para implementar las acciones necesarias en base a los eventos. Para este caso se ha implementado la función *extern void toggleIface_opLED(const Toggle* handle, const sc_integer LEDNumber); , que enciende y apaga el LED.
 
 ![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/toggle.PNG)
+
+#### 2.2 - Ejemplo 2, Blinky
 
 El segundo ejemplo blink.sct también es un diagrama de estado simple, que implementa sus eventos como timers para encender y apagar el LED 3. Se modificó la función *opLED*  de forma tal que reciba una constante boolena de estado ON, OFF. Para el manejo de los timer se utilizó los archivos *TimerTicks.h* y *TimerTicks.c* de la biblioteca sapi para implementar las siguientes funciones que responden a los eventos *after x ms*. 
 
@@ -96,9 +99,12 @@ Estas funciones trabajan con interrupciones y son utilizadas por las acciones de
 
 ![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/blink.PNG)
 
+#### 2.3 - Ejemplo 3, IdleBlink
 
 En el tercer ejemplo se muestra la implementacion de estados compuestos.Completo mañana, me voy a cursar :)
 
 
+#### 2.4 - Ejemplo 4, Buttons
 
 
+#### 2.5 - Ejemplo 5, Application
