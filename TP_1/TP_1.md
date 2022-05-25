@@ -11,7 +11,8 @@
   
 ## 1) Guía para compilar y debuggear 
 
-En primer lugar, se debe proceder a instalar el CIAA Launcher, cargar el proyecto firmware_v3 e instalar el plug in de Yakindu como se indica los siguientes links:
+En primer lugar, se debe proceder a instalar el CIAA Launcher, cargar el proyecto firmware_v3 e instalar el plug in de 
+Yakindu como se indica los siguientes links:
 
 - https://github.com/epernia/software.
 - https://drive.google.com/drive/folders/1zd6Gdea687fpQ7gfa3lu9GBVB7Hph5qz
@@ -31,9 +32,12 @@ En el archivo Makefile se configura la placa a utilizar y el programa a compilar
 
 #### 1.2 Generación de código Yakindu
 
-Dentro de la carpeta del ejemplo a compilar, deben existir 2 archivos, un .sct y un .sgen. El archivo con extensión .sct es el que contiene la máquina de estado del ejemplo.
-El archivo .sgen es el encargado de generar los archivos correspondientes a la máquina de estados. Genera 3 tipos de archivos: un \<nombre>.c, un \<nombre>.h y un \<nombre_requiered>.c.
-Los dos primeros archivos, corresponde al código generado por Yakindu, y el último archivo indica cuales son las funciones que debemos generar nosotros. 
+Dentro de la carpeta del ejemplo a compilar, deben existir 2 archivos, un .sct y un .sgen. El archivo con extensión .sct 
+es el que contiene la máquina de estado del ejemplo.
+El archivo .sgen es el encargado de generar los archivos correspondientes a la máquina de estados. Genera 3 tipos de 
+archivos: un \<nombre>.c, un \<nombre>.h y un \<nombre_requiered>.c.
+Los dos primeros archivos, corresponde al código generado por Yakindu, y el último archivo indica cuales son las funciones 
+que debemos generar nosotros. 
 
 Para Generar el código se debe hacer clic derecho sobre \<nombre>.sgen => Generate Code Artifacts.
 
@@ -41,9 +45,11 @@ Para Generar el código se debe hacer clic derecho sobre \<nombre>.sgen => Gener
 
 #### 1.3 Compilación y debug
 
-Una vez generado el codigo, se debe compilar haciendo clic en el martillo de arriba a la izquierda o haciendo clic derecho sobre el proyecto => Build Project.
+Una vez generado el codigo, se debe compilar haciendo clic en el martillo de arriba a la izquierda o haciendo clic derecho 
+sobre el proyecto => Build Project.
 
-Luego, para debagguear se debe hacer clic en la flecha que se encuentra al costado del botón de debug y seleccionar Debug Configurations.
+Luego, para debagguear se debe hacer clic en la flecha que se encuentra al costado del botón de debug y seleccionar Debug 
+Configurations.
 
 ![Debug_1](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Debug_process_1.png)
 
@@ -61,13 +67,15 @@ En caso de querer modificar el proyecto se debe hacer clic en Search Project y s
 
 #### 1.4 Problemas
 
-El principal problema a la hora de instalar las herramientas necesarias para la utilización de la placa EDU-CIAA fue lograr el correcto funcionamiento de Yakindu.
-En primer lugar, se instalo la última versión disponible (4.0.5) desde el Marketplace, la cual terminó no siendo compatible con la versión de eclipse utilizada. 
+El principal problema a la hora de instalar las herramientas necesarias para la utilización de la placa EDU-CIAA fue 
+lograr el correcto funcionamiento de Yakindu.
+En primer lugar, se instalo la última versión disponible (4.0.5) desde el Marketplace, la cual terminó no siendo compatible 
+con la versión de eclipse utilizada. 
 Para solucionarlo, se recurrió a instalar la versión 3.4.1 realizando los siguientes pasos.
 
-- Clic en Help -> Install New Software.
-- Desmarcar la opcion "Show only the latest versions of available software".
-- Ingresar en "Work with" el siguiente link: http://updates.yakindu.com/statecharts/releases/.
+- Click en Help -> Install New Software.
+- Desmarcar la opción "Show only the latest versions of available software".
+- Ingresar en "Work with" el siguiente link: http://updates.Yakindu.com/statecharts/releases/.
 - Esperar que termine la búsqueda.
 - Buscar la versin 3.4.1.
 - Seleccionar todo las opciones e instalarlo.
@@ -76,33 +84,101 @@ Para solucionarlo, se recurrió a instalar la versión 3.4.1 realizando los sigu
 
 
 
-## 2) Explicación de los ejemplos de statechart de la sapi
+## 2) Explicación de ejemplos de Yakindu
 
-A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca *sapi*. En todos los ejemplos se ha simulado su comportamiento como lo indica la siguiente figura
+A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca *sapi*. En 
+todos los ejemplos se ha simulado su comportamiento como lo indica la siguiente figura:
 
 ![simulationStateChart](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/simulationStateChart.png)
 
-#### 2.1 - Ejemplo 1, Toggle
+### 2.1) Ejemplo 1 - Toggle
 
-El primer ejemplo *toggle.sct* es un diagrama de estado implementado con yakindu, en este ejemplo se ha definido un solo evento que enciende y apaga el LED con un tiempo determinado por un delay. En particular este tiempo controla todo el ciclo del programa *main.c*. Desde el lado del desarrollador yakindu solicita que en el archivo *ToggleRequired.h*, que se implementan determinadas funciones que trabajan como la interfaz entre nuestro diagrama de estados y la placa electrónica de desarrollo. Por otro lado, esta función definida en nuestro *main.c*, será utilizada por yakindu para implementar las acciones necesarias en base a los eventos. Para este caso se ha implementado la función *extern void toggleIface_opLED(const Toggle* handle, const sc_integer LEDNumber); , que enciende y apaga el LED.
+El primer ejemplo *toggle.sct* es un diagrama de estados implementado con Yakindu, en este ejemplo se ha definido un solo 
+evento que enciende y apaga el LED con un tiempo determinado por un delay. En particular este tiempo controla todo el ciclo 
+del programa *main.c*.
 
 ![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/toggle.PNG)
 
-#### 2.2 - Ejemplo 2, Blinky
+A partir del evento evTick que ocurre cada TICKRATE_MS se ejecuta la función opLED que apaga o enciende el LED3 dependiendo 
+en que estado se encuentre.
 
-El segundo ejemplo blink.sct también es un diagrama de estado simple, que implementa sus eventos como timers para encender y apagar el LED 3. Se modificó la función *opLED*  de forma tal que reciba una constante boolena de estado ON, OFF. Para el manejo de los timer se utilizó los archivos *TimerTicks.h* y *TimerTicks.c* de la biblioteca sapi para implementar las siguientes funciones que responden a los eventos *after x ms*. 
+#### Funciones de inicialización
 
-- *extern void blink_setTimer(Blink* handle, const sc_eventid evid, const sc_integer time_ms, const sc_boolean periodic);
-- *extern void blink_unsetTimer(Blink* handle, const sc_eventid evid);
+- _**boardConfig()**_: Según la placa seleccionada se configuran e inicializan los GPIO.
+- _**tickConfig()**_: Se inicializa el Ticks counter según TICKRATE_MS. Se establece el tiempo que tarda en producirse 
+  una interrupción.
+- _**tickCallbackSet()**_: Se setea que función se llamará cuando se produzca la interrupción.
+- _**toggle_init(), toggle_enter()**_: Se inicializa el Statechart.
 
-Estas funciones trabajan con interrupciones y son utilizadas por las acciones definidas en el código generado por yakindu.
+#### Funciones externas
+- _**myTickHook()**_: Cuando se dispara la interrupción de sysTick se setea un Flag: SysTick_Time_Flag.
+- _**toggleIface_opLED()**_: Invierte el estado de una salida conectada a un LED.
 
-![Toggle](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/blink.PNG)
+#### Ciclo while
+- El estado del LED es invertido en el programa principal.
+    - _**__WFI()**_: El microcontrolador espera una interrupción que lo despierte.
 
-#### 2.3 - Ejemplo 3, IdleBlink
+    - Cuando el uC se despierta, el programa verifica el valor de SysTick_Time_Flag y en función de eso continua o no.
+        - Resetea el valor de SysTick_Time_Flag.
+        - Se produce el evento definido: evTick
+        - Se ejecuta un ciclo del diagrama de estados.
 
-En el tercer ejemplo se muestra la implementacion de estados compuestos.Completo mañana, me voy a cursar :)
+    - El uC vuelve a dormirse.
 
+### 2.2) Ejemplo 2 - Blink
+
+El segundo ejemplo, *blink.sct*, es un diagrama de estados simple que invierte el estado de un LED 3 luego de un periodo 
+de tiempo usando timers.
+
+![blink](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/blink.PNG)
+
+Para el manejo de los timers se utilizaron los archivos *TimerTicks.h* y *TimerTicks.c* de la biblioteca sapi. Las funciones
+definidas estos archivos son utilizadas por las acciones definidas en el código generado por Yakindu.
+
+#### Funciones de inicialización
+
+A las funciones implementadas y utilizadas del ejemplo 1, se les agregan las siguientes:
+
+- _**InitTimerTicks()**_: Inicializa el timer.
+- _**blink_init(), blink_enter()**_: Inicializa el Statechart.
+
+#### Funciones externas
+- _**blinkIface_opLED()**_: Setea el estado de un LED dado a partir de un valor boolean.
+- _**blink_setTimer()**_: Setea el timer a partir de los eventos temporales de la máquina de estados.
+- _**blink_unsetTimer()**_: Resetea el timer.
+
+#### Ciclo while
+- El estado del LED es invertido en el programa principal.
+    - _**__WFI()**_: El microcontrolador espera una interrupción que lo despierte.
+
+    - Cuando el uC se despierta, el programa verifica el valor de SysTick_Time_Flag y en función de eso continua o no.
+        - Resetea el valor de SysTick_Time_Flag.
+        - Actualiza todos los Timer Ticks.  
+        - Recorre todos los Timer Ticks y si hay algún evento pendiente:
+          - Se produce el evento.
+            - A partir de un valor boolean se setea el estado de un LED.
+          - Se marca como ejecutado.
+        - Se ejecuta un ciclo del diagrama de estados.
+
+    - El uC vuelve a dormirse.
+
+#### 2.3) Ejemplo 3 - IdleBlink
+
+El diagrama de estados de este ejemplo representa un programa que se encarga de invertir el estado de un LED luego de un
+cierto periodo de tiempo. Para esto, se utilizan los eventos temporales de Yakindu y un timer implementado con TimerTicks. 
+
+![idleBlink](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/idleBlink.PNG)
+
+A diferencia del diagrama de estados anterior, este tiene un estado de idle, "reposo". Transcurrido cierto tiempo, se entra en el
+estado compuesto, "titila", en el cual se desarrolla una secuencia en la que el LED 3 se enciende y se apaga.
+
+Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que se encuentra en la biblioteca sapi.
+
+#### Funciones de inicialización
+
+#### Funciones externas
+
+#### Ciclo while
 
 #### 2.4 - Ejemplo 4, Buttons
 
