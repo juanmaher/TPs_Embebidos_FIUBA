@@ -195,13 +195,10 @@ la humedad del ambiente y controlarla mediante la utilización de un ventilador 
 recipiente externo. También, realiza el control y sensado de la temperatura del proceso. Por otra parte, posee un sensado 
 del estado de la tapa para lograr frenar cualquier tipo de control cada vez que el usuario abre la compostera para introducir
 material orgánico. Luego de que el usuario depostie material, se activa un motor para poder mezclar el compost e integrar
-los nuevos materiales con la mezcla. A continuación se presenta un diagrama de estado de la compostera.
-
-![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Principal.png)
-
-Se puede observar que existen 3 maquinas de estados diferentes para controlar los estados de la compostera. A continuación,
-se explicara cada maquina de estado por separado, sin embargo antes se mencionarán algunas consideraciones tomadas en cuenta
-para la realización de cada máquina.
+los nuevos materiales con la mezcla.
+ 
+A continuación, se explicará cada máquina de estado por separado, sin embargo antes se mencionarán algunas consideraciones 
+tomadas en cuenta para la realización de cada máquina.
 
 #### Consideraciones
 
@@ -213,6 +210,8 @@ Para la creación de esta máquina de estado se tuvieron en cuenta algunas consi
 - Que el usuario únicamente va a abrir la tapa para depositar materiales orgánicos.
 
 #### Humedad
+
+![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Humedad.png)
 
 Esta máquina de estados es la encargada del control de humedad del proceso. Existen 3 estados:
 - HUMEDECIENDO: estado en el cual la bomba de agua se encuentra encendida y se esta humedeciendo la mezcla. En este caso,
@@ -231,6 +230,8 @@ de humedad ya que el usuario se encuentra depositando material orgánico.
 
 #### Temperatura
 
+![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Temperatura.png)
+
 Esta máquina de estados es la encargada del control de temperatura del proceso. En este caso, solo se controlan las altas 
 temperatura que son las mas perjudiciales para lograr un correcto proceso de compostaje. Existen 2 estados:
 - ENFRIANDO: estado en el cual el ventilador se encuentra encendido para enfriar el compost. En este caso, el ventilador 
@@ -245,6 +246,8 @@ Por otra parte, existen 3 eventos posibles:
 de temperatura ya que el usuario se encuentra depositando material orgánico.
 
 #### Compostar
+
+![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Compostar.png)
 
 Esta máquina de estados es la encargada de controlar el proceso cuando el usuario abre la tapa para depositar materiales
 orgánicos. Existen 4 estados:
@@ -281,11 +284,14 @@ se especifica la acción que representa cada pulsador.
 ###### Complicaciones con pulsador 1
 
 Como se puede observar en las máquinas de estados, el pulsador 1 no tiene un debounce como el resto de los pulsadores. Esto
-se realizó de esta forma para evitar un bug que estabamos teniendo a la hora de presionar el pulsador 1, el cual interrumpe
-los otros procesos de control, y luego se presionaba otro pulsador. Esto provocaba que si se soltaba el pulsador 1, pero se
+se realizó de esta forma para evitar un bug que estabamos teniendo a la hora de presionar el pulsador 1 (el cual interrumpe
+los otros procesos de control) y luego se presionaba otro pulsador. Esto provocaba que si se soltaba el pulsador 1, pero se
 seguía presionando el otro pulsador, este se comportaba como si se estuviera presionando el pulsador 1. Mediante esta solución,
-logramos obtener el resultado esperado, el cual tambien se asemeja mas a la realidad, dado que el sensor de abertura y cerrado
-de tapa no dispone de ningun debounce.
+logramos obtener el resultado esperado, el cual tambien se asemeja más a la realidad, dado que el sensor de abertura y cerrado
+de tapa no se debe implementar ningún debounce.
+
+###### Máquina de estado completa de la compostera
+![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Principal.png)
 
 #### Main
 
