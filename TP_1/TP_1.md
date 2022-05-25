@@ -36,7 +36,7 @@ Dentro de la carpeta del ejemplo a compilar, deben existir 2 archivos, un .sct y
 es el que contiene la máquina de estado del ejemplo.
 El archivo .sgen es el encargado de generar los archivos correspondientes a la máquina de estados. Genera 3 tipos de 
 archivos: un \<nombre>.c, un \<nombre>.h y un \<nombre_requiered>.c.
-Los dos primeros archivos, corresponde al código generado por Yakindu, y el último archivo indica cuales son las funciones 
+Los dos primeros archivos corresponde al código generado por Yakindu y el último archivo indica cuales son las funciones 
 que debemos generar nosotros. 
 
 Para Generar el código se debe hacer clic derecho sobre \<nombre>.sgen => Generate Code Artifacts.
@@ -290,6 +290,17 @@ seguía presionando el otro pulsador, este se comportaba como si se estuviera pr
 logramos obtener el resultado esperado, el cual tambien se asemeja más a la realidad, dado que el sensor de abertura y cerrado
 de tapa no se debe implementar ningún debounce.
 
+###### Loop pulsadores 2, 3 y 4
+
+A partir de los diagramas de estados se puede observar que, a diferencia del pulsador 1, los pulsador 2, 3 y 4 en el estado
+OPRIMIDO tiene un "loop" en el cual el evento ecTECXOprimido los vuelve a llevar al mismo estado. Esto se implementó de 
+esta forma para lograr que, si algun pulsador se mantiene presionado y en el medio se presiona el pulsador 1, una vez que
+se suelta el pulsador 1, el proceso de control que se estaba llevando acabo anteriormente continue sin la necesidad de 
+volver a presionar el pulsador, ya que este se encuentra presionado. Un ejemplo que es equivalemte a esta sitación es
+si se encuentra encendido el ventilador para bajar la temperatura de la mezcla pero en el medio se abre la tapa.
+En ese caso, el ventilador se debería apagarse hasta cerrar la tapa y luego volverse a encender si la temperatura sigue
+estando por encima de los 60°C.
+
 ##### Máquina de estado completa de la compostera
 A continuación se puede observar el diagrama completo de la compostera.
 ![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Principal.png)
@@ -302,8 +313,9 @@ explicado anteriormente. Por este motivo, se hara hincapie en la parte de códig
 ![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Codigo_switch_compostera.png)
 
 En primer lugar, se puede observar que se implementó un switch para poder diferenciar los 4 pulsadores ya que ahora cada 
-uno tiene una funcion específica. Además, existe una condición especial para el pulsador 1, ya que es el que en caso de que
-la tapa se encuentre abierta se deben parar todos los procesos de control que se estaban llevando a cabo.
+uno tiene una funcion específica correspondiente. Además, existe una condición especial para el pulsador 1, ya que es el 
+encargado del manejar el estado de la tapa, la cual si se encuentra abierta se deben parar todos los procesos de control
+que se estaban llevando a cabo.
 
 #### Resultados
 De esta forma, a partir de las máquinas de estados realizadas y las modificaciones implementadas en el main.c se obtuvo el
