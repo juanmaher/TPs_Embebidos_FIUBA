@@ -194,7 +194,7 @@ para aumentar la velocidad del proceso y reducir la generación de malos olores.
 la humedad del ambiente y controlarla mediante la utilización de un ventilador y la inyección de agua de un
 recipiente externo. También, realiza el control y sensado de la temperatura del proceso. Por otra parte, posee un sensado 
 del estado de la tapa para lograr frenar cualquier tipo de control cada vez que el usuario abre la compostera para introducir
-material orgánico. Luego de que el usuario depostie material, se activa un motor para poder mezclar el compost e integrar
+material orgánico. Luego de que el usuario deposite el material, se activa un motor para poder mezclar el compost e integrar
 los nuevos materiales con la mezcla.
  
 A continuación, se explicará cada máquina de estado por separado, sin embargo antes se mencionarán algunas consideraciones 
@@ -202,12 +202,12 @@ tomadas en cuenta para la realización de cada máquina.
 
 #### Consideraciones
 
-Para la creación de esta máquina de estado se tuvieron en cuenta algunas consideraciones:
-
-- Que la temperatura y la humedad no tienen relación alguna y se pueden controlar por separado.
-- Que la compostera nunca se va a encontrar por debajo de los -10ºC.
-- Que el usuario va a depositar materiales aptos para el compostaje.
-- Que el usuario únicamente va a abrir la tapa para depositar materiales orgánicos.
+- La temperatura y la humedad no tienen relación alguna y se pueden controlar por separado.
+- La compostera nunca se va a encontrar por debajo de los -10ºC.
+- El usuario va a depositar materiales aptos para el compostaje.
+- El usuario únicamente va a abrir la tapa para depositar materiales orgánicos.
+- No se van a desarrollar dos procesos de control al mismo tiempo. Es decir, si se tiene que controlar temperatura
+y humedad, primero se controlará una y después la otra.
 
 #### Humedad
 
@@ -235,7 +235,7 @@ de humedad ya que el usuario se encuentra depositando material orgánico.
 Esta máquina de estados es la encargada del control de temperatura del proceso. En este caso, solo se controlan las altas 
 temperatura que son las mas perjudiciales para lograr un correcto proceso de compostaje. Existen 2 estados:
 - ENFRIANDO: estado en el cual el ventilador se encuentra encendido para enfriar el compost. En este caso, el ventilador 
-encendido o apagado se representa con el LED RGB en azul.
+encendido o apagado se representa con el LED RGB en rojo.
 - ESPERANDO: estado en el cual la temperatura del compost se encuentra por debajo del umbral máximo de temperatura ideal 
 por lo cual el ventilador se encuentra apagado.
 
@@ -287,14 +287,14 @@ Como se puede observar en las máquinas de estados, el pulsador 1 no tiene un de
 se realizó de esta forma para evitar un bug que estabamos teniendo a la hora de presionar el pulsador 1 (el cual interrumpe
 los otros procesos de control) y luego se presionaba otro pulsador. Esto provocaba que si se soltaba el pulsador 1, pero se
 seguía presionando el otro pulsador, este se comportaba como si se estuviera presionando el pulsador 1. Mediante esta solución,
-logramos obtener el resultado esperado, el cual tambien se asemeja más a la realidad, dado que el sensor de abertura y cerrado
+logramos obtener el resultado esperado, el cual también se asemeja más a la realidad dado que en el sensor de abertura y cerrado
 de tapa no se debe implementar ningún debounce.
 
 ###### Loop pulsadores 2, 3 y 4
 
 A partir de los diagramas de estados se puede observar que, a diferencia del pulsador 1, los pulsador 2, 3 y 4 en el estado
 OPRIMIDO tiene un "loop" en el cual el evento ecTECXOprimido los vuelve a llevar al mismo estado. Esto se implementó de 
-esta forma para lograr que, si algun pulsador se mantiene presionado y en el medio se presiona el pulsador 1, una vez que
+esta forma para lograr que, si algún pulsador se mantiene presionado y en el medio se presiona el pulsador 1, una vez que
 se suelta el pulsador 1, el proceso de control que se estaba llevando acabo anteriormente continue sin la necesidad de 
 volver a presionar el pulsador, ya que este se encuentra presionado. Un ejemplo que es equivalemte a esta sitación es
 si se encuentra encendido el ventilador para bajar la temperatura de la mezcla pero en el medio se abre la tapa.
@@ -308,7 +308,7 @@ A continuación se puede observar el diagrama completo de la compostera.
 #### Main
 
 El código para implementar la compostera esta basado en el ejercicio 5 (application) por lo cual gran parte es igual a lo ya
-explicado anteriormente. Por este motivo, se hara hincapie en la parte de código modificada respecto a dicho ejercicio.
+explicado anteriormente. Por este motivo, se hará hincapié en la parte de código modificada respecto a dicho ejercicio.
 
 ![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Codigo_switch_compostera.png)
 
@@ -323,4 +323,4 @@ comportamiento deseado, es decir:
 
 - Cada pulsador controla el evento especificado simulando una compostera real.
 - Al presionar el pulsador 1 el resto de los pulsadores dejan de tener efecto ya que la "tapa se encuentra abierta".
-- Los pulsadores 2, 3 y 4, solo se pueden activar cuando la tapa se encuetra cerra (esto incluye la etapa de mezclado).
+- Los pulsadores 2, 3 y 4, solo se pueden activar cuando la tapa se encuetra cerrada (esto incluye la etapa de mezclado).
