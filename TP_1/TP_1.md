@@ -184,3 +184,64 @@ Para el manejo de los timers se utilizó nuevamente la librería TimerTicks que 
 
 
 #### 2.5 - Ejemplo 5, Application
+
+## 3) Ejemplos de Trabajo Práctico Final 
+
+### 3.1 - Compostera automática
+
+El proyecto consiste en un dispositivo capaz de sensar y controlar los diferentes parámetros del proceso de compostaje 
+para aumentar la velocidad del proceso y reducir la generación de malos olores. La compostera tiene la capacidad de sensar 
+la humedad del ambiente y controlarla mediante la utilización de un ventilador y la inyección de agua de un
+recipiente externo. También, realiza el control y sensado de la temperatura del proceso. Por otra parte, posee un sensado 
+del estado de la tapa para lograr frenar cualquier tipo de control cada vez que el usuario abre la compostera para introducir
+material orgánico. Luego de que el usuario depostie material, se activa un motor para poder mezclar el compost e integrar
+los nuevos materiales con la mezcla. A continuación se presenta un diagrama de estado de la compostera.
+
+![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Principal.png)
+
+Se puede observar que existen 3 maquinas de estados diferentes para controlar los estados de la compostera. A continuación,
+se explicara cada maquina de estado por separado, sin embargo antes se mencionarán algunas consideraciones tomadas en cuenta
+para la realización de cada máquina.
+
+#### Consideraciones
+
+Para la creación de esta máquina de estado se tuvieron en cuenta algunas consideraciones:
+
+- Que la temperatura y la humedad no tienen relación alguna y se pueden controlar por separado.
+- Que la compostera nunca se va a encontrar por debajo de los -10ºC.
+- Que el usuario va a depositar materiales aptos para el compostaje.
+
+#### Humedad
+
+Esta máquina de estados es la encargada del control de humedad del proceso. Existen 3 estados:
+- HUMEDECIENDO: estado en el cual la bomba de agua se encuentra encendida y se esta humedeciendo la mezcla. En este caso,
+la bomba encencida o apaga de representa con el LED RGB en verde.
+- DESHUMEDECIENDO: estado en el cual el ventilador se encuentra encendido para secar el compost. En este caso, el ventilador
+encendido o apagado se representa con el LED RGB en azul.
+- ESPERANDO: estado en el cual la humedad del compost se encuentra entre el rango ideal por lo cual el ventilador
+y la bomba se encuentran apagadas.
+
+Por otra parte, existen 4 eventos posibles:
+- siHumedadMenor40: corresponde a que la humedad del compost es menor al 40% por lo cual se debe humectar la mezcla.
+- siHumedadMayor60: corresponde a que la humedad del compost es mayor al 60% por lo cual se debe deshumectar la mezcla.
+- siHumedadEstable: corresponde a que la humedad del compost se encuentra entre el rango óptimo de humedad.
+- siAberturaTapa: corresponde a que la tapa se encuentra abierta, por lo cual se debe frenar cualquier proceso de control
+de humedad ya que el usuario se encuentra depositando material orgánico.
+
+#### Temperatura
+
+Esta máquina de estados es la encargada del control de temperatura del proceso. En este caso, solo se controlan las altas 
+temperatura que son las mas perjudiciales para lograr un correcto proceso de compostaje. Existen 2 estados:
+- ENFRIANDO: estado en el cual el ventilador se encuentra encendido para enfriar el compost. En este caso, el ventilador 
+encendido o apagado se representa con el LED RGB en azul.
+- ESPERANDO: estado en el cual la temperatura del compost se encuentra por debajo del umbral máximo de temperatura ideal 
+por lo cual el ventilador se encuentra apagado.
+
+Por otra parte, existen 3 eventos posibles:
+- siTemperaturaMayor60: corresponde a que la temperatura del compost es mayor al 60°C por lo cual se debe enfriar la mezcla.
+- siTemperaturaEstable: corresponde a que la temperatura del compost se encuentra entre el rango óptimo de temperatura.
+- siAberturaTapa: corresponde a que la tapa se encuentra abierta, por lo cual se debe frenar cualquier proceso de control
+de temperatura ya que el usuario se encuentra depositando material orgánico.
+
+#### Compostar
+
