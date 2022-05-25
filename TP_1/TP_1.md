@@ -210,6 +210,7 @@ Para la creación de esta máquina de estado se tuvieron en cuenta algunas consi
 - Que la temperatura y la humedad no tienen relación alguna y se pueden controlar por separado.
 - Que la compostera nunca se va a encontrar por debajo de los -10ºC.
 - Que el usuario va a depositar materiales aptos para el compostaje.
+- Que el usuario únicamente va a abrir la tapa para depositar materiales orgánicos.
 
 #### Humedad
 
@@ -244,4 +245,49 @@ Por otra parte, existen 3 eventos posibles:
 de temperatura ya que el usuario se encuentra depositando material orgánico.
 
 #### Compostar
+
+Esta máquina de estados es la encargada de controlar el proceso cuando el usuario abre la tapa para depositar materiales
+orgánicos. Existen 4 estados:
+- RELLENANDO: estado en el cual el usuario abrió la tapa y se encuentra depositando materiales orgánicos. En este caso,
+el estado de la tapa se representa mediante el encendio o apagado LED3.
+- SONANDO: estado en el cual el usuario lleva mucho tiempo la tapa abierta o se olvidó la tapa abierta y comienza a sonar
+una alarma para avisar que la debe cerrar. Este caso se representa con el LED1 prendido y se apaga el led indicador de 
+la tapa abierta LED3.
+- MEZCLANDO: estado en el cual se enciende el motor para mezclar el compost una vez que el usuario ya depositó el material
+orgánico. En ese caso, el encendido y apagado del motoro se representa con el encendido y apagado del LED2.
+- ESPERANDO: estado en el cual el motor se encuentra apagado hasta que el usuario deposite material orgánico y cierre la tapa.
+
+Por otra parte, existen 2 eventos posible:
+- siAberturaTapa: corresponde a la apertura de tapa por parte del usuario.
+- siCerradoTapa: Corresponde a que la tapa se encuentra cerrada luego de depostiar material orgánico.
+
+##### Pulsadores
+Todos los eventos mencionados en las máquinas de estados van a ser activados por la utilización de los pulsadores de la 
+placa EDU-CIAA. Para ello, dado la cantidad de estados, cada pulsador va a ser el encargado de manejar dos eventos como se 
+muestra en los siguientes diagramas.
+
+![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Pulsadores.png)
+
+Como se puede observar, cada pulsador activa un evento al mantenerse presionado o al estar sin presionar. En la siguiente tabla
+se especifica la acción que representa cada pulsador.
+
+|Pulsador                    | Presionado                 | Sin presionar              |
+|----------------------------|----------------------------|----------------------------|
+|TEC1                        | Abrir tapa                 | Cerrar tapa                |
+|TEC2                        | Humedad mayor al 60%       | Humedad estable            |
+|TEC3                        | Humedad menor al 40%       | Humedad estable            |
+|TEC4                        | Temperatura mayor a 60ºC   | Temperatura estable        |
+
+###### Complicaciones con pulsador 1
+
+Como se puede observar en las máquinas de estados, el pulsador 1 no tiene un debounce como el resto de los pulsadores. Esto
+se realizó de esta forma para evitar un bug que estabamos teniendo a la hora de presionar el pulsador 1, el cual interrumpe
+los otros procesos de control, y luego se presionaba otro pulsador. Esto provocaba que si se soltaba el pulsador 1, pero se
+seguía presionando el otro pulsador, este se comportaba como si se estuviera presionando el pulsador 1. Mediante esta solución,
+logramos obtener el resultado esperado, el cual tambien se asemeja mas a la realidad, dado que el sensor de abertura y cerrado
+de tapa no dispone de ningun debounce.
+
+#### Main
+
+Al igual que en los ejemplos analizados anteriormente, existen funciones generadas por Yakindu y otras que se deben generar.
 
