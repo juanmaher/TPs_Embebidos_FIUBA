@@ -166,7 +166,7 @@ A las funciones implementadas y utilizadas del ejemplo 1, se les agregan las sig
 
 
 
-#### 2.3 Ejemplo 3 - IdleBlink
+### 2.3 Ejemplo 3 - IdleBlink
 
 El diagrama de estados de este ejemplo representa un programa que se encarga de invertir el estado de un LED luego de un
 cierto periodo de tiempo. Para esto, se utilizan los eventos temporales de Yakindu y un timer implementado con TimerTicks. 
@@ -192,7 +192,7 @@ El ciclo while de este ejemplo es equivalente al del ejemplo 2.
 
 
 
-#### 2.4 Ejemplo 4 - Buttons
+### 2.4 Ejemplo 4 - Buttons
 
 El diagrama de estados de este ejemplo representa el funcionamiento de un programa que permite encender o apagar un LED
 con un pulsador. Cuando se aprieta se dispara un evento evTECXOprimido y se pasa del estado NO_OPRIMIDO al estado
@@ -236,7 +236,7 @@ Las funciones que se llaman al iniciar el programa son las mismas que en los eje
     
 
 
-#### 2.5 Ejemplo 5 - Application
+### 2.5 Ejemplo 5 - Application
 
 El diagrama de estados implementado para este ejemplo representa un programa que se encarga de encender, apagar y hacer
 parpadear LEDs según los botones que se pulsen. Para esto se utilizan timers y los eventos temporales de Yakindu. Además,
