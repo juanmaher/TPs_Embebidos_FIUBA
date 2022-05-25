@@ -290,10 +290,25 @@ seguía presionando el otro pulsador, este se comportaba como si se estuviera pr
 logramos obtener el resultado esperado, el cual tambien se asemeja más a la realidad, dado que el sensor de abertura y cerrado
 de tapa no se debe implementar ningún debounce.
 
-###### Máquina de estado completa de la compostera
+##### Máquina de estado completa de la compostera
+A continuación se puede observar el diagrama completo de la compostera.
 ![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Compostera_Diagrama_Principal.png)
 
 #### Main
 
-Al igual que en los ejemplos analizados anteriormente, existen funciones generadas por Yakindu y otras que se deben generar.
+El código para implementar la compostera esta basado en el ejercicio 5 (application) por lo cual gran parte es igual a lo ya
+explicado anteriormente. Por este motivo, se hara hincapie en la parte de código modificada respecto a dicho ejercicio.
 
+![Diagrama_Compostera](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Codigo_switch_compostera.png)
+
+En primer lugar, se puede observar que se implementó un switch para poder diferenciar los 4 pulsadores ya que ahora cada 
+uno tiene una funcion específica. Además, existe una condición especial para el pulsador 1, ya que es el que en caso de que
+la tapa se encuentre abierta se deben parar todos los procesos de control que se estaban llevando a cabo.
+
+#### Resultados
+De esta forma, a partir de las máquinas de estados realizadas y las modificaciones implementadas en el main.c se obtuvo el
+comportamiento deseado, es decir:
+
+- Cada pulsador controla el evento especificado simulando una compostera real.
+- Al presionar el pulsador 1 el resto de los pulsadores dejan de tener efecto ya que la "tapa se encuentra abierta".
+- Los pulsadores 2, 3 y 4, solo se pueden activar cuando la tapa se encuetra cerra (esto incluye la etapa de mezclado).
