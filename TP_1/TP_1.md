@@ -240,7 +240,7 @@ Las funciones que se llaman al iniciar el programa son las mismas que en los eje
 
 El diagrama de estados implementado para este ejemplo representa un programa que se encarga de encender, apagar y hacer
 parpadear LEDs según los botones que se pulsen. Para esto se utilizan timers y los eventos temporales de Yakindu. Además,
-se agrega un antirrebote para que haya una correcta interpretación de los estados de los botones.
+se agrega un antirrebote para que haya una correcta interpretación de los estados de los botones. Todo esto se compone en tres regiones que trabajan de forma cuasi concurrente.
 
 
 El Statechart de este ejemplo incorpora cosas de los ejemplos anteriores. Para la interpretación de los botones utiliza
@@ -251,7 +251,7 @@ los mismos estados y eventos del ejemplo 4. A diferencia del ejemplo anterior, s
 - Con la tecla 3 se enciende el LED 2.
 - Con la tecla 4 se setea el evento interno siTitilarLED.
 
-Este diagrama incorpora como una región cuasi concurrente a los estados del ejemplo 3 que hacen parpadear el LED 3 con la diferencia de que ahora se pasa
+Este diagrama incorpora los estados del ejemplo 3 que hacen parpadear el LED 3 con la diferencia de que ahora se pasa
 al estado compuesto, TITILAR, cuando se dispara a traves de un *raise* el evento interno siTitilarLED y no luego de un tiempo establecido. Dentro de
 este estado compuesto se pasa del estado APAGADO al ENCENDIDO y viceversa cada cierto tiempo establecido. Para esto se
 utiliza el TimerTicks de la biblioteca sapi. En el estado APAGADO se ejecuta la función opLED() que apagado el LED 3 y 
