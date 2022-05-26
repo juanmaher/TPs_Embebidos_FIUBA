@@ -242,6 +242,7 @@ El diagrama de estados implementado para este ejemplo representa un programa que
 parpadear LEDs según los botones que se pulsen. Para esto se utilizan timers y los eventos temporales de Yakindu. Además,
 se agrega un antirrebote para que haya una correcta interpretación de los estados de los botones.
 
+
 El Statechart de este ejemplo incorpora cosas de los ejemplos anteriores. Para la interpretación de los botones utiliza
 los mismos estados y eventos del ejemplo 4. A diferencia del ejemplo anterior, se le da importancia a que botón fue pulsado, ya que
 dependiendo de esto se valida con el evento interno, siTECXOK, el valor de viTecla y se ejecutan distintas funciones:
@@ -251,12 +252,12 @@ dependiendo de esto se valida con el evento interno, siTECXOK, el valor de viTec
 - Con la tecla 3 se enciende el LED 2.
 - Con la tecla 4 se setea el evento interno siTitilarLED.
 
-Este diagrama incorpora del ejemplo 3 sus estados para hacer parpadear el LED 3 con la diferencia de que ahora se pasa
-al estado compuesto, TITILAR, cuando se dispara el evento siTitilarLED y no luego de un tiempo establecido. Dentro de
+Este diagrama incorpora como una región cuasi concurrente a los estados del ejemplo 3 que hacen parpadear el LED 3 con la diferencia de que ahora se pasa
+al estado compuesto, TITILAR, cuando se dispara a traves de un *raise* el evento interno siTitilarLED y no luego de un tiempo establecido. Dentro de
 este estado compuesto se pasa del estado APAGADO al ENCENDIDO y viceversa cada cierto tiempo establecido. Para esto se
 utiliza el TimerTicks de la biblioteca sapi. En el estado APAGADO se ejecuta la función opLED() que apagado el LED 3 y 
-analogamente en el estado ENCENDIDO se ejecuta la misma función que lo enciende. Cuando se ejecute el evento siNoTitilarLED 
-se sale del estado TITILAR y se vuelve al estado REPOSO. 
+analogamente en el estado ENCENDIDO se ejecuta la misma función que lo enciende. Cuando se ejecute el evento siNoTitilarLED por medio de otro *raise*
+se sale del estado TITILAR y se vuelve al estado REPOSO. Este es el primer ejemplo donde se trabaja con condiciones de guarda en las transiciones del estado main region, ya que para cada valor obtenido del pulsador que se guarda en *viTecla*, se compara el valor de esta variables con las cuatro teclas en orden decreciente empezando por la tecla 4.
 
 ![Application](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/ImagenesEjemploStateCharts/Application.PNG)
 
