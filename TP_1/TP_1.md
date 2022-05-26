@@ -244,8 +244,7 @@ se agrega un antirrebote para que haya una correcta interpretación de los estad
 
 
 El Statechart de este ejemplo incorpora cosas de los ejemplos anteriores. Para la interpretación de los botones utiliza
-los mismos estados y eventos del ejemplo 4. A diferencia del ejemplo anterior, se le da importancia a que botón fue pulsado, ya que
-dependiendo de esto se valida con el evento interno, siTECXOK, el valor de viTecla y se ejecutan distintas funciones:
+los mismos estados y eventos del ejemplo 4. A diferencia del ejemplo anterior, se le da importancia a que botón fue pulsado, cuando se entra al estado OPRIMIDO se realizar un raise al evento interno, siTECXOK, y se guarda en viTecla el valor que tomo el evento evTECXOprimido. De esta forma podemos obtener las distintas acciones en función:
 
 - Con la tecla 1 se apagan todos los LEDs y se setea el evento interno siNoTitilarLED. 
 - Con la tecla 2 se enciende el LED 1.
