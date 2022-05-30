@@ -36,7 +36,7 @@ Dentro de la carpeta del ejemplo a compilar, deben existir 2 archivos, un .sct y
 es el que contiene la máquina de estado del ejemplo.
 El archivo .sgen es el encargado de generar los archivos correspondientes a la máquina de estados. Genera 3 tipos de 
 archivos: un \<nombre>.c, un \<nombre>.h y un \<nombre_requiered>.c.
-Los dos primeros archivos corresponde al código generado por Yakindu y el último archivo indica cuales son las funciones 
+Los dos primeros archivos corresponden al código generado por Yakindu y el último archivo indica cuales son las funciones 
 que debemos generar nosotros. 
 
 Para Generar el código se debe hacer clic derecho sobre \<nombre>.sgen => Generate Code Artifacts.
@@ -69,7 +69,7 @@ En caso de querer modificar el proyecto se debe hacer clic en Search Project y s
 
 El principal problema a la hora de instalar las herramientas necesarias para la utilización de la placa EDU-CIAA fue 
 lograr el correcto funcionamiento de Yakindu.
-En primer lugar, se instalo la última versión disponible (4.0.5) desde el Marketplace, la cual terminó no siendo compatible 
+En primer lugar, se instaló la última versión disponible (4.0.5) desde el Marketplace, la cual terminó no siendo compatible 
 con la versión de eclipse utilizada. 
 Para solucionarlo, se recurrió a instalar la versión 3.4.1 realizando los siguientes pasos.
 
@@ -78,7 +78,7 @@ Para solucionarlo, se recurrió a instalar la versión 3.4.1 realizando los sigu
 - Ingresar en "Work with" el siguiente link: http://updates.Yakindu.com/statecharts/releases/.
 - Esperar que termine la búsqueda.
 - Buscar la versin 3.4.1.
-- Seleccionar todo las opciones e instalarlo.
+- Seleccionar todas las opciones e instalarlo.
 
 ![Version_Yakindu](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/Version_Yakindu.png)
 
@@ -86,7 +86,7 @@ Para solucionarlo, se recurrió a instalar la versión 3.4.1 realizando los sigu
 
 ## 2) Explicación de ejemplos de Yakindu
 
-A continuacion se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca *sapi*. En 
+A continuación se muestra una explicación de los ejemplos de diagrama de estado que contiene la biblioteca *sapi*. En 
 todos los ejemplos se ha simulado su comportamiento como lo indica la siguiente figura:
 
 ![simulationStateChart](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_1/Imagenes_TP_1/simulationStateChart.png)
