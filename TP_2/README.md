@@ -37,6 +37,8 @@ A continuación se detallan las funciones útiles de la librería sapi para el p
 
 ## 2) Implementación de funciones para el manejo de los GPIO's
 
+
+
 ## 3) Implementación para el trabajo final
 
 
