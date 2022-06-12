@@ -38,6 +38,9 @@ A continuación se detallan las funciones útiles de la librería sapi para el p
 ## 2) Implementación de funciones para el manejo de los GPIO's
 
 
+![Distribucion de carpetas y archivos.](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_2/imagenes_tp2/Tp2_archivos.png)
+
+
 
 ## 3) Implementación para el trabajo final
 
