@@ -10,7 +10,7 @@
   *Meoli Lucas - 102190 - lmeoli@fi.uba.ar*
   
 ## 1) Migración del proyecto app.c
-Para la correcta migración del proyecto app.c se copio la carpeta *firmware_v3\examples\c\app*, en *\firmware_v3\projects\TP2*, luego se procedió a cambiar los nombres del de los archivos *app.c* y *app.h* por *tp2.c* y *tp.h* respectivamente. Luego en el archivo TP2.h se reescribió 
+Para la correcta migración del proyecto app.c se copio la carpeta *firmware_v3\examples\c\app*, en *\firmware_v3\projects\TP2*, luego se procedió a cambiar los nombres del de los archivos *app.c* y *app.h* por *tp2.c* y *tp.h* respectivamente. Luego en el archivo tp2.h se reescribió 
 ```C
 #ifndef _APP_H_
 #define _APP_H_
