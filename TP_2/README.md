@@ -9,33 +9,7 @@
 
   *Meoli Lucas - 102190 - lmeoli@fi.uba.ar*
   
-## 1) Migración del proyecto app.c
-Para la correcta migración del proyecto app.c se copio la carpeta *firmware_v3\examples\c\app*, en *\firmware_v3\projects\TP2*, luego se procedió a cambiar los nombres del de los archivos *app.c* y *app.h* por *tp2.c* y *tp.h* respectivamente. Luego en el archivo tp2.h se reescribió 
-```C
-#ifndef _APP_H_
-#define _APP_H_
-```
-por 
-
-```C
-#ifndef _TP2_H_
-#define _TP2_H_
-```
-para luego realizar un include en *tp2.c*. Con estos pasos realizamos una migración exitosa.
-
-A continuación se detallan las funciones útiles de la librería sapi para el parpadeo de un led y un *printf* a través de la *UART_USB*.
-
-- *boardConfig()*:  Inicializa y configura todos los pines de la EDU-CIAA como GPIO.
-- *delay(n )*: Retardo bloqueante que dura *n* milisegundos
-- *bool_t gpioRead( gpioMap_t pin )*:  Leé el valor de lo que está conectado a *pin*, por ejemplo TEC4.
-- *bool_t gpioWrite( gpioMap_t pin, bool_t value )*: Escribe el valor de *value* en *pin*, por ejemplo LEDG.
-- *bool_t gpioToggle( gpioMap_t pin )*: Alterna el estado de *pin*, por ejemplo invierte el valor de un LEDG.
-- *printf() que utiliza int printf_(const char* format, ...)*: Imprime un string a través de la *UART_USB*, para lo que se debe tener conectado a una terminal por puerto serie donde se pueda visualizar los datos.
-
-
-
-
-## 2) Implementación de funciones para el manejo de los GPIO's
+## 1) Funciones para el manejo de los GPIO's
 
 Para la implementación de nuestras funciones para el manjeo de los GPIOs se debió entender el funcionamiento de cada una de ellas. A continuación se explicarán los conceptos principales de las siguientes funciones:  *gpioInit()*, *gpioWrite()* y *gpioRead()*.
 
@@ -341,14 +315,128 @@ bool_t gpioRead( gpioMap_t pin )
 Como se puede observar, la función es practicamente igual a gpioWrite(), con la diferencia de que ahora se llama 
 *Chip_GPIO_ReadPortBit()* para leer de la memoria el estado del pin.
 
+## 2) Migración del proyecto app.c
 
-#### Creacion de nuetras librerías
+Luego de entender el funcionamiento de las librerías relacionadas con los puerto de entrada y salida, se prosiguió a realizar
+nuestras propias librerías de GPIO y se migró el ejemplo app.c para comprobar su funcionamiento mediante nuestras libreriías.
 
-![Distribucion de carpetas y archivos.](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_2/imagenes_tp2/Tp2_archivos.png)
+Para la correcta migración del proyecto app.c se copio la carpeta *firmware_v3\examples\c\app*, en *\firmware_v3\projects\TP2*, luego se procedió a cambiar los nombres del de los archivos *app.c* y *app.h* por *tp2.c* y *tp.h* respectivamente. Luego en el archivo tp2.h se reescribió 
+```C
+#ifndef _APP_H_
+#define _APP_H_
+```
+por 
 
+```C
+#ifndef _TP2_H_
+#define _TP2_H_
+```
+para luego realizar un include en *tp2.c*. Con estos pasos realizamos una migración exitosa.
 
+A continuación se detallan las funciones útiles de la librería sapi para el parpadeo de un led y un *printf* a través de la *UART_USB*.
 
+- *boardConfig()*:  Inicializa y configura todos los pines de la EDU-CIAA como GPIO.
+- *delay(n )*: Retardo bloqueante que dura *n* milisegundos
+- *bool_t gpioRead( gpioMap_t pin )*:  Leé el valor de lo que está conectado a *pin*, por ejemplo TEC4.
+- *bool_t gpioWrite( gpioMap_t pin, bool_t value )*: Escribe el valor de *value* en *pin*, por ejemplo LEDG.
+- *bool_t gpioToggle( gpioMap_t pin )*: Alterna el estado de *pin*, por ejemplo invierte el valor de un LEDG.
+- *printf() que utiliza int printf_(const char* format, ...)*: Imprime un string a través de la *UART_USB*, para lo que se debe tener conectado a una terminal por puerto serie donde se pueda visualizar los datos.
 
-## 3) Implementación para el trabajo final
+Para lograr obtener nuestras propias librerias se crearon los siguientes archivos:
 
+- mygpio.h
+- mygpio.c
+- my_peripheral_map.h
+- my_peripheral_map.c
+- my_datatype.h
 
+De esta forma se obtiene la siguiente distribución de archivos.
+
+![Distribucion de carpetas y archivos.](https://github.com/juanmaher/TPs_Embebidos_FIUBA/blob/main/TP_2/imagenes_tp2/Tp2_archivos_3.png)
+
+Cada libreriía creada se basa en las librerías sapi, donde en primer lugar se modificaron los nombres de las funciones a utilizar
+agregando el pronombre "my". Es decir, la función que antes se llama *gpioWrite* ahora se llama *mygpioWrite*. Además,
+se eliminaron todas las definiciones y las opciones relacionadas a otras placas, dejando solo las configuraciones para la
+EDU_CIAA, dado que es la única placa que nosotros vamos a realizar.
+
+Una vez creadas nuestras librerías y migrado el ejemplo app.c, se comprobó el correcto funcionamiento del programa app.c
+dejando como conclusión de que la creación de las libreriías fue correcta.
+
+## 3) Ejemplo de prueba propio
+
+Una vez finaliada la creación y verificación de nuestras librerías para GPIO, se implementaron dichas librerías para realizar un ejemplo 
+propio. El ejemplo consiste en modificar, mediante dos pulsadores, el porcentaje de tiempo prendido de un LED que titila a una
+frecuencia constante. Es decir, se debe modificar, utilizando dos pulsadores, el duty cycle de una señal que prende y apaga un LED
+manteniendo siempre la período constante. Para ello, se realizó el siguiente código:
+
+```C
+/*=====[Inclusions of function dependencies]=================================*/
+
+#include "mygpio.h"
+#include "sapi.h"
+
+/*=====[Definition macros of private constants]==============================*/
+
+#define LUZ_ROJA     LED2
+#define LUZ_AMARILLA LED1
+#define LUZ_VERDE    LEDG
+
+/*=====[Main function, program entry point after power on or reset]==========*/
+
+int main( void )
+{
+   bool_t LED_ON;
+   /* Variable de Retardo no bloqueante */
+   delay_t delay_NB;
+   int32_t duty = 500;
+
+   // ----- Setup -----------------------------------
+   boardInit();
+
+   /* Inicializar Retardo no bloqueante con tiempo en milisegundos */
+   delayConfig( &delay_NB, duty );
+   mygpioWrite( LED2, ON );
+   LED_ON = true;
+
+   while( true ) {
+	 delay(100);
+	      /* delayRead retorna TRUE cuando se cumple el tiempo de retardo */
+	 if ( delayRead( &delay_NB ) ){
+		 mygpioToggle( LUZ_ROJA );
+		 if(LED_ON == true){
+			 LED_ON = false;
+			 delayWrite( &delay_NB, 1000 - duty );
+		 }else{
+			 LED_ON = true;
+			 delayWrite( &delay_NB, duty );
+		 }
+	  }else{
+			if(!mygpioRead( TEC1 )){
+		       if(duty < 1000) {
+		    	   duty += 100;
+		       }
+		   }
+
+			if(!mygpioRead( TEC2 )){
+			      if(duty > 0) {
+			    	  duty -= 100;
+			      }
+			}
+	  }
+
+   }
+   return 0;
+}
+
+``` 
+
+En primer lugar, se debe mencionar que en el ejemplo se utilizan nuestras siguientes funciones: *mygpioWrite()*, *mygpioRead()* y  *mygpioToggle()*.
+
+Luego, para la resolución del ejercicio se utilizó un delay no bloqueante para asi poder modificar el duty cycle en cualquier momento
+de la señal. Es decir, que cada vez que se presione un pulsador, el duty cycle va aumentar o disminuir dependiendo el pulsador presionado.
+Sin embargo, por como se planteó la solución, el duty cycle solo se actualiza una vez que termina un período. Es decir, durante el período
+el duty puede ser modificado con cualquiera de los dos pulsadores, pero ese valor recien se va a actualizar en el siguiente período.
+
+Si bien no es la mejor solución para el problema planeteado, se decidió utilizar de esta forma para familiarizarse con el 
+delay no bloqueantes y para centrarse en la utilización de las funciones sobre GPIO que era el objetivo principal del trabajo
+práctico.
