@@ -22,7 +22,7 @@ Es la función que inicializa el pin utilizado como GPIO. En la familia de chips
 - i. Configurar eléctricamente el pin a utilizar a través del periférico System Control Unit (SCU).
 - ii. Configurar el modo de uso del GPIO a través de sus propios registros en el memory mapping. 
 
-La función está definida como: **bool_t gpioInit( gpioMap_t pin, gpioInit_t config );**
+La función está definida como: **bool_t gpioInit( gpioMap_t pin, gpioInit_t config )**
 
 El primer parámetro es *pin* que es un tipo enumerativo gpioMap_t, definido en sapi_peripheral_map.h, en donde distintos puertos 
 son representados por un número.
@@ -63,7 +63,7 @@ typedef enum {
 } gpioInit_t;
 ```
 
-A continuación se muestra las principales funciones que componen a gpioInit:    
+A continuación se muestra el contenido de la fucnion gpioInit():    
 
 ```C
 bool_t gpioInit( gpioMap_t pin, gpioInit_t config )
@@ -226,7 +226,7 @@ const pinInitGpioLpc4337_t gpioPinsInit[] = {
       { {2,12}, FUNC0, {1,12} },   // 42   LED3    LED3   
 };
 ```
-Por ejemplo al invocar la función con *gpioInit( GPIO5, GPIO_INPUT );*, donde se inicializa al GPIO5 como entrada, lo que sucede
+Por ejemplo al invocar la función con *gpioInit( GPIO5, GPIO_INPUT)*, donde se inicializa al GPIO5 como entrada, lo que sucede
 es que GPIO5 = 13, el cual corresponde a gpioPinsInit[13] que contiene los siguientes atributos:
 
 - PinNamePortN = 6
