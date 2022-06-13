@@ -11,17 +11,18 @@
   
 ## 1) Funciones para el manejo de los GPIO's
 
-Para la implementación de nuestras funciones para el manjeo de los GPIOs se debió entender el funcionamiento de cada una de ellas. A continuación se explicarán los conceptos principales de las siguientes funciones:  *gpioInit()*, *gpioWrite()* y *gpioRead()*.
+Para implementar nuestras funciones para el manjeo de los GPIOs, se analizó el funcionamiento de cada una
+de las librerías y funciones relacionadas con los puertos de entrada y salida. A continuación se explicarán los 
+conceptos principales de las siguientes funciones:  *gpioInit()*, *gpioWrite()* y *gpioRead()*.
 
 #### gpioInit()
 
 Es la función que inicializa el pin utilizado como GPIO. En la familia de chips LPC43xx esta instrucción consiste en dos partes:
 
-i. Configurar eléctricamente el pin a utilizar a través del periférico System Control Unit (SCU).
+- i. Configurar eléctricamente el pin a utilizar a través del periférico System Control Unit (SCU).
+- ii. Configurar el modo de uso del GPIO a través de sus propios registros en el memory mapping. 
 
-ii. Configurar el modo de uso del GPIO a través de sus propios registros en el memory mapping. 
-
-La función esta definida como: **bool_t gpioInit( gpioMap_t pin, gpioInit_t config );**
+La función está definida como: **bool_t gpioInit( gpioMap_t pin, gpioInit_t config );**
 
 El primer parámetro es *pin* que es un tipo enumerativo gpioMap_t, definido en sapi_peripheral_map.h, en donde distintos puertos 
 son representados por un número.
